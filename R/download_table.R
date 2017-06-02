@@ -6,7 +6,7 @@
 #'"ctl00$conteudo$$btnMes" downloads recorded crime count.
 #'
 #'@export
-download_table_sp <- function(ano, municipio, type = "ctl00$conteudo$$btnMes"){
+download_table_sp <- function(ano, municipio, type = "ctl00$conteudo$btnMensal"){
   url <- 'http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx'
 
   pivot <- httr::GET(url)
@@ -22,7 +22,7 @@ download_table_sp <- function(ano, municipio, type = "ctl00$conteudo$$btnMes"){
     rvest::html_nodes("input[name='__EVENTVALIDATION']") %>%
     rvest::html_attr("value")
 
-  params <- list(`__EVENTTARGET` = "ctl00$conteudo$$btnMes",
+  params <- list(`__EVENTTARGET` = type,
                  `__EVENTARGUMENT` = "",
                  `__LASTFOCUS` = "",
                  `__VIEWSTATE` = view_state,
