@@ -34,7 +34,7 @@ download_table_sp <- function(ano, municipio, type = "ctl00$conteudo$btnMensal")
 
   httr::POST(url, body = params, encode = 'form') %>%
     xml2::read_html() %>%
-    rvest::html_table() %>%
+    rvest::html_table(dec = ',') %>%
     dplyr::first() %>%
     #serve pra pegar apenas a primeira tabela da página, se houver mais do que uma. Estou assumindo que a tabela que eu quero é sempre a primeira.
     dplyr::mutate(municipio = municipio,
