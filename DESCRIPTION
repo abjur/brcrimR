@@ -1,14 +1,16 @@
 Package: brcrimR
-Title: What the Package Does (one line, title case)
+Title: Downloads Brazilian Criminal Information
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: c(person("Fernando", "Corrêa", email = "fcorrea@abjur.com", role = c("aut", "cre")),
+             person("José", "de Jesus", email = "jjesusfilho@gmail.com", role = c("aut")))
+Description: Brazillian security offices maintains several sources of criminal information. Very often, those sources are not user friendly, specially when building historical databases. This packages provides a tidy and (almost) unified framework for accessing of those informations. 
 Depends: R (>= 3.3.2)
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: httr,
     xml2,
     rvest,
-    dplyr
+    dplyr,
+    glue
 RoxygenNote: 6.0.1
