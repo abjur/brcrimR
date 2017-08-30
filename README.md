@@ -2,19 +2,19 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/azeloc/brcrimR.svg?branch=master)](https://travis-ci.org/azeloc/brcrimR)
 
-Brazillian security offices maintains several sources of criminal information. Very often, those sources are not user friendly and doesn't give an explict way to build historical databases.
+Brazillian security offices maintain several sources of criminal information. Very often, those sources are not user friendly and don't give an explict way to build historical databases.
 
-This packages provides a tidy and (almost) unified framework for accessing of those informations. 
+This packages provides a tidy and (almost) unified framework for accessing those informations. 
 
 # Basic usage
 
-Today this package only scrapes information in São Paulo. As example, we can obtain crime statistics for the county of São Paulo using
+Today, this package scrapes information only in São Paulo. As an example, we can obtain crime statistics for the county of São Paulo using
 
 ```{r}
 brcrimR::get_summarized_table_sp(year = '2017', city = '0')
 ```
 
-São Paulo's Security Office also disponibilize detailed information on the crimes reports that originated the table above. One can obtain such information using
+São Paulo's Security Office also disponibilize detailed information on the crime reports that originated the table above. One can obtain such information using
 
 ```{r}
 brcrimR::get_detailed_table_sp(folder = 'btnHomicicio',
