@@ -65,11 +65,20 @@ get_table <- function(r, department = '0', hdf = "1504014009092", export_header 
 }
 
 #' @export
-build_historical_database <- function(f, y, m, d, ...){
+get_historical_detailed_table_sp <- function(f, y, m, d, ...){
 
   expand.grid(folder = f, year = y, month = m, department = d,
               stringsAsFactors = F) %>%
     as.list() %>%
     purrr::pmap(get_detailed_table_sp) %>%
     purrr::map_df(open_table)
+}
+
+#' @export
+get_historical_summarized_table_sp <- function(y, c, ty){
+
+  expand.grid(year = y, city = c, type = ty,
+              stringsAsFactors = F) %>%
+    as.list() %>%
+    purrr::pmap_df(get_summarized_table_sp)
 }
