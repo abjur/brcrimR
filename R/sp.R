@@ -26,9 +26,10 @@ get_summarized_table_sp <- function(year, city, type = "ctl00$conteudo$btnMensal
 
   httr::POST(url, body = params, encode = 'form') %>%
     xml2::read_html() %>%
-    rvest::html_table(dec = ',') %>%
+    rvest::html_table() %>%
     dplyr::first() %>%
     #serve pra pegar apenas a primeira tabela da página, se houver mais do que uma. Estou assumindo que a tabela que eu quero é sempre a primeira.
+    dplyr::mutate_at(.funs = parse_number_br, .vars = dplyr::vars(Jan:Total)) %>%
     dplyr::mutate(municipio = city,
                   ano = year)
 }
