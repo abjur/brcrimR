@@ -46,7 +46,8 @@ get_detailed_table_sp <- function(folder, year, month, department, url = 'http:/
     browse(folder, dest = 'folder') %>%
     browse(year, dest = 'year') %>%
     browse(month, dest = 'month') %>%
-    get_table(department, ...)
+    get_table(department, ...) %>%
+    open_table()
 }
 
 browse <- function(r, val, dest){
