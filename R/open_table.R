@@ -7,5 +7,5 @@ open_table <- function(r){
   httr::content(r, type = 'raw') %>%
     readr::write_file(tmp)
 
-  read.table(tmp, fileEncoding = "UTF-16LE", sep = "\t", header = T, stringsAsFactors = F)
+  read.delim(tmp, fileEncoding = "UTF-16LE", sep = "\t", header = T, stringsAsFactors = F)
 }
