@@ -41,12 +41,19 @@ get_summarized_table_sp <- function(year, city, type = "ctl00$conteudo$btnMensal
 #' @param type Formulary to make the request, encodes the type of information to be downloaded.
 #'
 #' @export
-get_detailed_table_sp <- function(folder, year, month, department, url = 'http://www.ssp.sp.gov.br/transparenciassp/', ...){
+get_detailed_table_sp <- function(folder, year, month, department, url = 'http://www.ssp.sp.gov.br/transparenciassp/', helper = T, ...){
+
+  if(helper){
+    h <- helper_sp(folder, year, month, department)
+  } else {
+    h <- list(f = folder, y = year, m = month, d = department)
+  }
+
   httr::GET(url) %>%
-    browse(folder, dest = 'folder') %>%
-    browse(year, dest = 'year') %>%
-    browse(month, dest = 'month') %>%
-    get_table(department, ...) %>%
+    browse(h$f, dest = 'folder') %>%
+    browse(h$y, dest = 'year') %>%
+    browse(h$m, dest = 'month') %>%
+    get_table(h$d, ...) %>%
     open_table()
 }
 
@@ -67,13 +74,14 @@ get_table <- function(r, department = '0', hdf = "1504014009092", export_header 
 }
 
 #' @export
-get_historical_detailed_table_sp <- function(f, y, m, d, ...){
+get_historical_detailed_table_sp <- function(f, y, m, d){
 
-  expand.grid(folder = f, year = y, month = m, department = d,
+  h <- helper_sp(f, y, m, d)
+
+  expand.grid(folder = h$f, year = h$y, month = h$m, department = h$d,
               stringsAsFactors = F) %>%
     as.list() %>%
-    purrr::pmap(get_detailed_table_sp) %>%
-    purrr::map_df(open_table)
+    purrr::pmap(get_detailed_table_sp, helper = F)
 }
 
 #' @export
