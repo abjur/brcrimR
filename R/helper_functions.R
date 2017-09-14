@@ -5,8 +5,8 @@ helper_sp <- function(f, y, m, d){
     )
 
     y <- dplyr::case_when(
-      as.numeric(y) < 2013 ~ '02',
-      as.numeric(y) >= 2013 ~ as.character(as.numeric(y)-2000),
+      as.numeric(y) < 2010 ~ stringr::str_sub(as.character(y), start = -1, end = -1),
+      as.numeric(y) >= 2010 ~ as.character(as.numeric(y)-2000),
       TRUE ~ y
     )
 
